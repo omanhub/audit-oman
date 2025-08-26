@@ -75,6 +75,11 @@
       line-height: 1.7;
     }
 
+    /* Fix anchor scrolling for sticky headers */
+    [id] {
+      scroll-margin-top: 160px; /* Adjust according to header + floating bar height */
+    }
+
     /* Floating top contact */
     .floating-contact {
       position: fixed;
@@ -225,17 +230,21 @@
   </style>
 
   <script>
-    window.addEventListener('scroll', function() {
-      const btn = document.getElementById('backToTop');
-      if(window.scrollY > 300) btn.style.display = 'block';
-      else btn.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function() {
+      const backBtn = document.getElementById('backToTop');
+
+      // Show/hide back to top button
+      window.addEventListener('scroll', () => {
+        backBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+      });
+
+      // Smooth scroll to top
+      backBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
-
-    function scrollTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
   </script>
-
+  
   <!--For verification of Google webmaster-->
   <meta name="google-site-verification" content="s_JRr490pgpchW2NOZbxb0Z2gZhhRDfQ4ewbDIUX1aE" />
   <!--For verification of Google webmaster-->
